@@ -6,15 +6,17 @@ import restaurantsRouter from '@modules/restaurants/infra/http/routes/restaurant
 import restaurantSessionsRouter from '@modules/restaurants/infra/http/routes/restaurantSessions.routes';
 
 import categoriesRouter from '@modules/categories/infra/http/routes/categories.routes';
-import passwordRouter from '@modules/users/infra/http/routes/password.routes';
+import userPasswordRouter from '@modules/users/infra/http/routes/userPassword.routes';
 
 const routes = Router();
 
 routes.use('/user', usersRouter);
-routes.use('/restaurants', restaurantsRouter);
-routes.use('/categories', categoriesRouter);
 routes.use('/user/session', userSessionsRouter);
+routes.use('/user/password', userPasswordRouter);
+
+routes.use('/restaurants', restaurantsRouter);
 routes.use('/restaurants/session', restaurantSessionsRouter);
-routes.use('/password', passwordRouter);
+
+routes.use('/categories', categoriesRouter);
 
 export default routes;
