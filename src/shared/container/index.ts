@@ -13,10 +13,10 @@ import IRestaurantsRepository from '@modules/restaurants/repositories/IRestauran
 import RestaurantsRepository from '@modules/restaurants/infra/typeorm/repositories/RestaurantsRepository';
 
 import IRestaurantTokensRepository from '@modules/restaurants/repositories/IRestaurantTokensRepository';
-import RestaurantTokensRepositories from '@modules/restaurants/infra/typeorm/repositories/RestaurantTokensRepositories';
+import RestaurantTokensRepository from '@modules/restaurants/infra/typeorm/repositories/RestaurantTokensRepository';
 
 import ICategoriesRepository from '@modules/categories/repositories/ICategoriesRepository';
-import CategoriesRepositories from '@modules/categories/infra/typeorm/repositories/CategoriesRepositories';
+import CategoriesRepository from '@modules/categories/infra/typeorm/repositories/CategoriesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -34,11 +34,11 @@ container.registerSingleton<IRestaurantsRepository>(
 );
 
 container.registerSingleton<IRestaurantTokensRepository>(
-  'RestaurantTokensRepositories',
-  RestaurantTokensRepositories,
+  'RestaurantTokensRepository',
+  RestaurantTokensRepository,
 );
 
 container.registerSingleton<ICategoriesRepository>(
-  'CategoriesRepositories',
-  CategoriesRepositories,
+  'CategoriesRepository',
+  CategoriesRepository,
 );

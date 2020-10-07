@@ -20,8 +20,8 @@ class CreateRestaurantsService {
     @inject('RestaurantsRepository')
     private restaurantsRepository: IRestaurantsRepository,
 
-    @inject('CategoriesRepositories')
-    private categoriesRepositories: ICategoriesRepository,
+    @inject('CategoriesRepository')
+    private categoriesRepository: ICategoriesRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
@@ -37,7 +37,7 @@ class CreateRestaurantsService {
       email,
     );
 
-    const checkCategoryExists = await this.categoriesRepositories.findCategory(
+    const checkCategoryExists = await this.categoriesRepository.findCategory(
       restaurant_category,
     );
 

@@ -3,7 +3,6 @@ import { getMongoRepository, MongoRepository, Not } from 'typeorm';
 
 import IRestaurantsRepository from '@modules/restaurants/repositories/IRestaurantsRepository';
 import ICreateRestaurantDTO from '@modules/restaurants/dtos/ICreateRestaurantDTO';
-import IFindAllRestaurantsDTO from '@modules/restaurants/dtos/IFindAllRestaurantsDTO';
 
 import Restaurant from '../schemas/Restaurant';
 
@@ -28,22 +27,10 @@ class RestaurantsRepository implements IRestaurantsRepository {
     return restaurant;
   }
 
-  public async findAllProviders({
-    except_restaurant_id,
-  }: IFindAllRestaurantsDTO): Promise<Restaurant[]> {
-    let restaurant: Restaurant[];
+  public async findAllRestaurants(): Promise<Restaurant[]> {
+    const restaurants = await this.ormRepository.find();
 
-    if (except_restaurant_id) {
-      restaurant = await this.ormRepository.find({
-        where: {
-          id: Not(except_restaurant_id),
-        },
-      });
-    } else {
-      restaurant = await this.ormRepository.find();
-    }
-
-    return restaurant;
+    return restaurants;
   }
 
   public async create(
