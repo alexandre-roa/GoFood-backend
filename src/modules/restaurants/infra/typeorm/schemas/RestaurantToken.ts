@@ -14,7 +14,6 @@ class RestaurantToken {
   id: ObjectID;
 
   @Column()
-  @Generated('uuid')
   token: string;
 
   @Column()
