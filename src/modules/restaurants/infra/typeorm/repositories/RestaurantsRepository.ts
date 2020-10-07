@@ -1,4 +1,5 @@
-import { getRepository, Repository, Not } from 'typeorm';
+import Category from '@modules/categories/infra/typeorm/schemas/Category';
+import { getMongoRepository, MongoRepository, Not } from 'typeorm';
 
 import IRestaurantsRepository from '@modules/restaurants/repositories/IRestaurantsRepository';
 import ICreateRestaurantDTO from '@modules/restaurants/dtos/ICreateRestaurantDTO';
@@ -7,10 +8,10 @@ import IFindAllRestaurantsDTO from '@modules/restaurants/dtos/IFindAllRestaurant
 import Restaurant from '../schemas/Restaurant';
 
 class RestaurantsRepository implements IRestaurantsRepository {
-  private ormRepository: Repository<Restaurant>;
+  private ormRepository: MongoRepository<Restaurant>;
 
   constructor() {
-    this.ormRepository = getRepository(Restaurant);
+    this.ormRepository = getMongoRepository(Restaurant);
   }
 
   public async findById(id: string): Promise<Restaurant | undefined> {

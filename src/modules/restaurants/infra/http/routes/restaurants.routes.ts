@@ -15,6 +15,7 @@ restaurantsRouter.post(
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      restaurant_category: Joi.string().required(),
     },
   }),
   restaurantsController.create,

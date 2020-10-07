@@ -5,9 +5,13 @@ import {
   ObjectID,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
+
+import Category from '@modules/categories/infra/typeorm/schemas/Category';
 
 @Entity('restaurants')
 class Restaurant {
@@ -24,8 +28,9 @@ class Restaurant {
   @Exclude()
   password: string;
 
-  @Column()
-  avatar: string;
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'category_name' })
+  restaurant_category: string;
 
   @CreateDateColumn()
   created_at: Date;

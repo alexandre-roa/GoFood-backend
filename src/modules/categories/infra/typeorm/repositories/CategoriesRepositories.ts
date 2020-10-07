@@ -11,6 +11,16 @@ class CategoriesRepository implements ICategoriesRepository {
     this.ormRepository = getMongoRepository(Category);
   }
 
+  public async findCategory(
+    category_name: string,
+  ): Promise<Category | undefined> {
+    const category = await this.ormRepository.findOne({
+      where: { category_name },
+    });
+
+    return category;
+  }
+
   public async create(CategoryData: ICreateCategoryDTO): Promise<Category> {
     const category = this.ormRepository.create(CategoryData);
 

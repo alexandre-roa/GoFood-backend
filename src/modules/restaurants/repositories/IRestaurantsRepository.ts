@@ -1,4 +1,5 @@
 import Restaurant from '../infra/typeorm/schemas/Restaurant';
+import Category from '@modules/categories/infra/typeorm/schemas/Category';
 import ICreateRestaurantDTO from '../dtos/ICreateRestaurantDTO';
 import IFindAllProvidersDTO from '../dtos/IFindAllRestaurantsDTO';
 
