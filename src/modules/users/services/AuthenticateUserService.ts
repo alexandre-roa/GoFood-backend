@@ -46,8 +46,10 @@ class AuthenticateUserService {
 
     const { secret, expiresIn } = authConfig.jwt;
 
+    const user_id = JSON.stringify(user.id).replace(/"/gm, '');
+
     const token = sign({}, secret, {
-      subject: JSON.stringify(user.id),
+      subject: user_id,
       expiresIn,
     });
 
