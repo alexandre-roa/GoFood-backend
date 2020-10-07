@@ -12,6 +12,9 @@ import UserTokensRepository from '@modules/users/infra/typeorm/repositories/User
 import IRestaurantsRepository from '@modules/restaurants/repositories/IRestaurantsRepository';
 import RestaurantsRepository from '@modules/restaurants/infra/typeorm/repositories/RestaurantsRepository';
 
+import IRestaurantTokensRepository from '@modules/restaurants/repositories/IRestaurantTokensRepository';
+import RestaurantTokensRepositories from '@modules/restaurants/infra/typeorm/repositories/RestaurantTokensRepositories';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -25,4 +28,9 @@ container.registerSingleton<IUserTokensRepository>(
 container.registerSingleton<IRestaurantsRepository>(
   'RestaurantsRepository',
   RestaurantsRepository,
+);
+
+container.registerSingleton<IRestaurantTokensRepository>(
+  'RestaurantTokensRepositories',
+  RestaurantTokensRepositories,
 );

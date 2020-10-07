@@ -1,10 +1,11 @@
 import { injectable, inject } from 'tsyringe';
 import path from 'path';
 
-import AppError from '@shared/errors/AppError';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
-import IUsersRepository from '../repositories/IUsersRepository';
-import IUserTokensRepository from '../repositories/IUserTokensRepository';
+
+import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   email: string;
@@ -30,7 +31,9 @@ class SendForgotPasswordEmailService {
       throw new AppError('User does not exists.');
     }
 
-    const { token } = await this.userTokensRepository.generate(user.id);
+    const { token } = await this.userTokensRepository.generate(
+      JSON.stringify(user.id),
+    );
 
     const forgotPasswordTemplate = path.resolve(
       __dirname,

@@ -3,10 +3,10 @@ import authConfig from '@config/auth';
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import IUsersRepository from '../repositories/IUsersRepository';
-import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
 
-import User from '../infra/typeorm/schemas/User';
+import Restaurant from '../infra/typeorm/schemas/Restaurant';
 
 interface IRequest {
   email: string;
@@ -14,30 +14,30 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: User;
+  restaurant: Restaurant;
   token: string;
 }
 
 @injectable()
-class AuthenticateUserService {
+class AuthenticateRestaurantService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    @inject('RestaurantsRepository')
+    private restaurantsRepository: IRestaurantsRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findByEmail(email);
+    const restaurant = await this.restaurantsRepository.findByEmail(email);
 
-    if (!user) {
+    if (!restaurant) {
       throw new AppError('Incorrect email/password combination.', 401);
     }
 
     const passwordMatched = await this.hashProvider.compareHash(
       password,
-      user.password,
+      restaurant.password,
     );
 
     if (!passwordMatched) {
@@ -47,15 +47,15 @@ class AuthenticateUserService {
     const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
-      subject: JSON.stringify(user.id),
+      subject: JSON.stringify(restaurant.id),
       expiresIn,
     });
 
     return {
-      user,
+      restaurant,
       token,
     };
   }
 }
 
-export default AuthenticateUserService;
+export default AuthenticateRestaurantService;
