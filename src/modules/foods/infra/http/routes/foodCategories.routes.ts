@@ -2,12 +2,15 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 import FoodCategoryController from '../controllers/FoodCategoryController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
-const foodCategories = Router();
+const foodCategoriesRouter = Router();
 
 const foodCategoryController = new FoodCategoryController();
 
-foodCategories.post(
+foodCategoriesRouter.use(ensureAuthenticated);
+
+foodCategoriesRouter.post(
   '/:restaurant_id/create_category',
   celebrate({
     [Segments.PARAMS]: {
@@ -20,4 +23,4 @@ foodCategories.post(
   foodCategoryController.create,
 );
 
-export default foodCategories;
+export default foodCategoriesRouter;
