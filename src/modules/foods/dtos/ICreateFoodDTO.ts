@@ -9,7 +9,7 @@ export default interface ICreateTransactionsDTO {
   title: string;
   description: string;
   price: number;
-  image_url: string;
+  image_url?: string;
   extras?: Extra[];
   category_id: string;
   category: FoodCategory | undefined;
