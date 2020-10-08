@@ -27,4 +27,6 @@ foodsRouter.post(
   foodsController.create,
 );
 
+foodsRouter.delete('/:food_id', foodsController.delete);
+
 export default foodsRouter;

@@ -5,5 +5,5 @@ export default interface IFoodsRepository {
   create(data: ICreateFoodDTO): Promise<Food>;
   find(): Promise<Food[]>;
   findOneFood(food_name: string): Promise<Food | undefined>;
-  delete(ids: Array<string>): Promise<void>;
+  delete(id: string): Promise<void>;
 }

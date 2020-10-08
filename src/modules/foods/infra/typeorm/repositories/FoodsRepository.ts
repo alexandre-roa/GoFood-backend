@@ -39,8 +39,8 @@ class FoodsRepository implements IFoodsRepository {
     return food;
   }
 
-  public async delete([...id]: Array<string>): Promise<void> {
-    await this.ormRepository.delete([...id]);
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 }
 

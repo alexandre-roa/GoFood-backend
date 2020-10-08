@@ -2,6 +2,7 @@ import { Response, Request } from 'express';
 import { container } from 'tsyringe';
 
 import CreateFoodService from '@modules/foods/services/CreateFoodService';
+import DeleteFoodService from '@modules/foods/services/DeleteFoodService';
 
 export default class FoodsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -20,5 +21,15 @@ export default class FoodsController {
     });
 
     return response.json(food);
+  }
+
+  public async delete(request: Request, response: Response): Promise<void> {
+    const { food_id } = request.params;
+
+    const deleteFood = container.resolve(DeleteFoodService);
+
+    await deleteFood.execute(food_id);
+
+    response.status(200).json({ message: 'Food deleted' });
   }
 }
