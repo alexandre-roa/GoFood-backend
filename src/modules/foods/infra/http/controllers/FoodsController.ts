@@ -3,10 +3,11 @@ import { container } from 'tsyringe';
 
 import CreateFoodService from '@modules/foods/services/CreateFoodService';
 import DeleteFoodService from '@modules/foods/services/DeleteFoodService';
+import GetFoods from '@modules/foods/services/GetAllFoods';
 
 export default class FoodsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { category_id } = request.params;
+    const { category_id, restaurant_id } = request.params;
     const { title, description, price, image_url, extras } = request.body;
 
     const createFood = container.resolve(CreateFoodService);
@@ -18,9 +19,20 @@ export default class FoodsController {
       image_url,
       extras,
       category_id,
+      restaurant_id,
     });
 
     return response.json(food);
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const { restaurant_id } = request.params;
+
+    const getFoods = container.resolve(GetFoods);
+
+    const foods = await getFoods.execute(restaurant_id);
+
+    return response.json(foods);
   }
 
   public async delete(request: Request, response: Response): Promise<void> {

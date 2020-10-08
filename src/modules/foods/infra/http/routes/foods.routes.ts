@@ -11,10 +11,11 @@ const foodsController = new FoodsController();
 foodsRouter.use(ensureAuthenticated);
 
 foodsRouter.post(
-  '/:category_id/',
+  '/:category_id/:restaurant_id',
   celebrate({
     [Segments.PARAMS]: {
       category_id: Joi.string().id().required(),
+      restaurant_id: Joi.string().id().required(),
     },
     [Segments.BODY]: {
       title: Joi.string().required(),
@@ -25,6 +26,16 @@ foodsRouter.post(
     },
   }),
   foodsController.create,
+);
+
+foodsRouter.get(
+  '/:restaurant_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      restaurant_id: Joi.string().id().required(),
+    },
+  }),
+  foodsController.index,
 );
 
 foodsRouter.delete('/:food_id', foodsController.delete);

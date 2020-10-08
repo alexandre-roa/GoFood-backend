@@ -6,7 +6,7 @@ import {
   MongoRepository,
 } from 'typeorm';
 import Food from '@modules/foods/infra/typeorm/schemas/Food';
-import FoodCategory from '@modules/foods/infra/typeorm/schemas/FoodCategory';
+import Restaurant from '@modules/restaurants/infra/typeorm/schemas/Restaurant';
 
 import IFoodsRepository from '@modules/foods/repositories/IFoodsRepository';
 import ICreateFoodDTO from '@modules/foods/dtos/ICreateFoodDTO';
@@ -25,8 +25,8 @@ class FoodsRepository implements IFoodsRepository {
     return food;
   }
 
-  public async find(): Promise<Food[]> {
-    const foods = await this.ormRepository.find();
+  public async find(restaurant: Restaurant): Promise<Food[]> {
+    const foods = await this.ormRepository.find({ where: { restaurant } });
 
     return foods;
   }

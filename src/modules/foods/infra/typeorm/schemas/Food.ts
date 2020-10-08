@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 
 import FoodCategory from './FoodCategory';
+import Restaurant from '@modules/restaurants/infra/typeorm/schemas/Restaurant';
 
 interface Extra {
   name: string;
@@ -35,6 +36,10 @@ class Food {
   })
   @JoinColumn({ name: 'food_category_id' })
   category: FoodCategory;
+
+  @ManyToOne(() => Restaurant, restaurant => restaurant.foods)
+  @JoinColumn({ name: 'restaurant_id' })
+  restaurant: Restaurant;
 
   @Column()
   image_url: string;

@@ -3,13 +3,14 @@ import {
   Column,
   ObjectIdColumn,
   ObjectID,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 
-import Category from '@modules/categories/infra/typeorm/schemas/Category';
+import Food from '@modules/foods/infra/typeorm/schemas/Food';
 
 @Entity('restaurants')
 class Restaurant {
@@ -28,6 +29,9 @@ class Restaurant {
 
   @Column()
   restaurant_category: string;
+
+  @OneToMany(() => Food, food => food.restaurant)
+  foods: Food[];
 
   @CreateDateColumn()
   created_at: Date;

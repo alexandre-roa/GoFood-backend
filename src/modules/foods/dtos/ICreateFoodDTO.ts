@@ -1,11 +1,12 @@
 import FoodCategory from '@modules/foods/infra/typeorm/schemas/FoodCategory';
+import Restaurant from '@modules/restaurants/infra/typeorm/schemas/Restaurant';
 
 interface Extra {
   name: string;
   price: string;
 }
 
-export default interface ICreateTransactionsDTO {
+export default interface IFoodDTO {
   title: string;
   description: string;
   price: number;
@@ -13,4 +14,6 @@ export default interface ICreateTransactionsDTO {
   extras?: Extra[];
   category_id: string;
   category: FoodCategory | undefined;
+  restaurant_id: string;
+  restaurant: Restaurant | undefined;
 }
