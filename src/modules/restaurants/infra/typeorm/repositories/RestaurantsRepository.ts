@@ -27,6 +27,16 @@ class RestaurantsRepository implements IRestaurantsRepository {
     return restaurant;
   }
 
+  public async findByCategory(
+    restaurant_category: string,
+  ): Promise<Restaurant | undefined> {
+    const restaurant = await this.ormRepository.findOne({
+      where: { restaurant_category },
+    });
+
+    return restaurant;
+  }
+
   public async findAllRestaurants(): Promise<Restaurant[]> {
     const restaurants = await this.ormRepository.find();
 

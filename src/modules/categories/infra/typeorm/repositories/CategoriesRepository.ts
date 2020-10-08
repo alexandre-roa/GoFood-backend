@@ -21,12 +21,17 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
+  public async listCategories(): Promise<Category[] | undefined> {
+    const categories = await this.ormRepository.find();
+
+    return categories;
+  }
+
   public async create(CategoryData: ICreateCategoryDTO): Promise<Category> {
     const category = this.ormRepository.create(CategoryData);
 
     await this.ormRepository.save(category);
 
-    console.log(category);
     return category;
   }
 }

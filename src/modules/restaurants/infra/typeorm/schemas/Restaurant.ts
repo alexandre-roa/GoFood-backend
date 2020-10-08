@@ -5,8 +5,6 @@ import {
   ObjectID,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
@@ -28,8 +26,7 @@ class Restaurant {
   @Exclude()
   password: string;
 
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_name' })
+  @Column()
   restaurant_category: string;
 
   @CreateDateColumn()

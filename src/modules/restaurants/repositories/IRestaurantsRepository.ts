@@ -6,6 +6,7 @@ export default interface IRestaurantsRepository {
   findAllRestaurants(): Promise<Restaurant[]>;
   findById(id: string): Promise<Restaurant | undefined>;
   findByEmail(email: string): Promise<Restaurant | undefined>;
+  findByCategory(restaurant_category: string): Promise<Restaurant | undefined>;
   create(data: ICreateRestaurantDTO): Promise<Restaurant>;
   save(restaurant: Restaurant): Promise<Restaurant>;
 }
