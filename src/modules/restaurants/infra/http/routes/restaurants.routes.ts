@@ -8,8 +8,6 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 const restaurantsRouter = Router();
 const restaurantsController = new RestaurantsController();
 
-restaurantsRouter.use(ensureAuthenticated);
-
 restaurantsRouter.post(
   '/',
   celebrate({
@@ -22,6 +20,8 @@ restaurantsRouter.post(
   }),
   restaurantsController.create,
 );
+
+restaurantsRouter.use(ensureAuthenticated);
 
 restaurantsRouter.get('/', restaurantsController.index);
 
