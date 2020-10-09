@@ -45,4 +45,14 @@ foodCategoriesRouter.get(
   selectedCategoryController.index,
 );
 
+foodCategoriesRouter.delete(
+  '/category/:category_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      category_id: Joi.string().id().required(),
+    },
+  }),
+  selectedCategoryController.delete,
+);
+
 export default foodCategoriesRouter;
