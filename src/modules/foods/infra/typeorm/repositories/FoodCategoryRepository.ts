@@ -47,8 +47,10 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
     return category;
   }
 
-  public async find(): Promise<FoodCategory[] | undefined> {
-    const categories = this.ormRepository.find();
+  public async find(
+    restaurant_id: string,
+  ): Promise<FoodCategory[] | undefined> {
+    const categories = this.ormRepository.find({ where: { restaurant_id } });
 
     return categories;
   }

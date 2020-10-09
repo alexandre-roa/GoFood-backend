@@ -23,4 +23,14 @@ foodCategoriesRouter.post(
   foodCategoryController.create,
 );
 
+foodCategoriesRouter.get(
+  '/:restaurant_id/categories',
+  celebrate({
+    [Segments.PARAMS]: {
+      restaurant_id: Joi.string().id().required(),
+    },
+  }),
+  foodCategoryController.index,
+);
+
 export default foodCategoriesRouter;

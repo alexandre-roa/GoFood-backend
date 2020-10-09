@@ -1,8 +1,9 @@
 import { Response, Request } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateFoodCategoryService from '@modules/foods/services/CreateFoodCategoryService';
-// import GetCategoryService from '@modules/categories/services/GetCategoryService';
+import GetAllCategories from '@modules/foods/services/GetAllCategories';
 // import DeleteCategoryService from '@modules/categories/services/DeleteCategoryService';
 
 export default class FoodCategoryController {
@@ -14,16 +15,17 @@ export default class FoodCategoryController {
 
     const category = await createCategory.execute({ title, restaurant_id });
 
-    return response.json(category);
+    return response.json(classToClass(category));
   }
 
-  // public async index(request: Request, response: Response): Promise<Response> {
-  //   const getCategories = container.resolve(GetCategoryService);
+  public async index(request: Request, response: Response): Promise<Response> {
+    const { restaurant_id } = request.params;
+    const getCategories = container.resolve(GetAllCategories);
 
-  //   const categories = await getCategories.find();
+    const categories = await getCategories.execute(restaurant_id);
 
-  //   return response.json(categories);
-  // }
+    return response.json(categories);
+  }
 
   // public async delete(request: Request, response: Response): Promise<Response> {
   //   const { category_id } = request.params;

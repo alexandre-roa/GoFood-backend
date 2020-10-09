@@ -1,5 +1,6 @@
 import { Response, Request } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateFoodService from '@modules/foods/services/CreateFoodService';
 import DeleteFoodService from '@modules/foods/services/DeleteFoodService';
@@ -22,7 +23,7 @@ export default class FoodsController {
       restaurant_id,
     });
 
-    return response.json(food);
+    return response.json(classToClass(food));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
