@@ -36,7 +36,7 @@ foodCategoriesRouter.get(
 );
 
 foodCategoriesRouter.get(
-  '/:restaurant_id/',
+  '/:restaurant_id/category',
   celebrate({
     [Segments.PARAMS]: {
       restaurant_id: Joi.string().id().required(),

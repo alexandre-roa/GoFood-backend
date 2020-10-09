@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('categories')
+@Entity('restaurant_categories')
 class Category {
   @ObjectIdColumn()
   id: ObjectID;

@@ -25,4 +25,6 @@ routes.use('/restaurant/password', restaurantPasswordRouter);
 routes.use('/foods', foodCategoriesRouter);
 routes.use('/foods', foodsRouter);
 
+routes.use('/restaurant_categories', categoriesRouter);
+
 export default routes;
