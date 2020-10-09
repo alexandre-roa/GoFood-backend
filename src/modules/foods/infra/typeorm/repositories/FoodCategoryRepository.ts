@@ -37,9 +37,10 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
 
   public async findOne(
     categoryTitle: string,
+    restaurant_id: string,
   ): Promise<FoodCategory | undefined> {
     const category = this.ormRepository.findOne({
-      where: { title: categoryTitle },
+      where: { title: categoryTitle, restaurant_id },
     });
 
     if (!category) throw new AppError('Category not found');

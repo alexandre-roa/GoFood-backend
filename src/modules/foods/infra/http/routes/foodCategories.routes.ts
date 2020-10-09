@@ -2,11 +2,13 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 import FoodCategoryController from '../controllers/FoodCategoryController';
+import SelectedCategoryController from '../controllers/SelectedCategoryController';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const foodCategoriesRouter = Router();
 
 const foodCategoryController = new FoodCategoryController();
+const selectedCategoryController = new SelectedCategoryController();
 
 foodCategoriesRouter.use(ensureAuthenticated);
 
@@ -31,6 +33,16 @@ foodCategoriesRouter.get(
     },
   }),
   foodCategoryController.index,
+);
+
+foodCategoriesRouter.get(
+  '/:restaurant_id/',
+  celebrate({
+    [Segments.PARAMS]: {
+      restaurant_id: Joi.string().id().required(),
+    },
+  }),
+  selectedCategoryController.index,
 );
 
 export default foodCategoriesRouter;
