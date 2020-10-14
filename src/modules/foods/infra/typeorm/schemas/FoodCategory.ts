@@ -24,6 +24,12 @@ class FoodCategory {
   @Column()
   restaurant_id: string;
 
+  @Column()
+  available: boolean;
+
+  @Column()
+  image_url: string;
+
   @ManyToOne(() => Restaurant)
   @JoinColumn({ name: 'restaurant_id' })
   restaurant: Restaurant;

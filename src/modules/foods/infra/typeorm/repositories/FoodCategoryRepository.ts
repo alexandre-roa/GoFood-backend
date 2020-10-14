@@ -15,10 +15,14 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
 
   public async create({
     title,
+    available,
+    image_url,
     restaurant_id,
   }: ICreateCategoryFoodDTO): Promise<FoodCategory> {
     const category = this.ormRepository.create({
       title,
+      available,
+      image_url,
       restaurant_id,
     });
 

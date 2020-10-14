@@ -20,6 +20,7 @@ foodCategoriesRouter.post(
     },
     [Segments.BODY]: {
       title: Joi.string().required(),
+      image_url: Joi.string().required(),
     },
   }),
   foodCategoryController.create,

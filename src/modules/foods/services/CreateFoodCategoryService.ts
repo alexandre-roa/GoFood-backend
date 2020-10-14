@@ -6,6 +6,7 @@ import FoodCategory from '../infra/typeorm/schemas/FoodCategory';
 
 interface IRequest {
   title: string;
+  image_url: string;
   restaurant_id: string;
 }
 @injectable()
@@ -17,9 +18,13 @@ class CreateFoodCategoryService {
 
   public async execute({
     title,
+    image_url,
     restaurant_id,
   }: IRequest): Promise<FoodCategory | null> {
-    const checkCategoryExist = await this.foodCategoryRepository.findOne(title);
+    const checkCategoryExist = await this.foodCategoryRepository.findOne(
+      title,
+      restaurant_id,
+    );
 
     if (checkCategoryExist) {
       throw new AppError('Category is already exists');
@@ -27,6 +32,8 @@ class CreateFoodCategoryService {
 
     const category = await this.foodCategoryRepository.create({
       title,
+      available: true,
+      image_url,
       restaurant_id,
     });
 

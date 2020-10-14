@@ -9,11 +9,15 @@ import GetAllCategories from '@modules/foods/services/GetAllCategories';
 export default class FoodCategoryController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { restaurant_id } = request.params;
-    const { title } = request.body;
+    const { title, image_url } = request.body;
 
     const createCategory = container.resolve(CreateFoodCategoryService);
 
-    const category = await createCategory.execute({ title, restaurant_id });
+    const category = await createCategory.execute({
+      title,
+      restaurant_id,
+      image_url,
+    });
 
     return response.json(classToClass(category));
   }
