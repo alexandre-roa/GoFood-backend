@@ -13,18 +13,8 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
     this.ormRepository = getMongoRepository(FoodCategory);
   }
 
-  public async create({
-    title,
-    available,
-    image_url,
-    restaurant_id,
-  }: ICreateCategoryFoodDTO): Promise<FoodCategory> {
-    const category = this.ormRepository.create({
-      title,
-      available,
-      image_url,
-      restaurant_id,
-    });
+  public async create(data: ICreateCategoryFoodDTO): Promise<FoodCategory> {
+    const category = this.ormRepository.create(data);
 
     await this.ormRepository.save(category);
 

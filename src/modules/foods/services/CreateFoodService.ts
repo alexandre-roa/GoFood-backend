@@ -15,7 +15,7 @@ interface IRequest {
   title: string;
   description: string;
   price: number;
-  image_url: string;
+  image_url?: string;
   extras?: Extra[];
   category_id: string;
   restaurant_id: string;
