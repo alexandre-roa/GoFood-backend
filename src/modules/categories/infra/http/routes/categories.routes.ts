@@ -18,7 +18,7 @@ categoriesRouter.post(
   categoriesController.create,
 );
 
-categoriesRouter.use(ensureAuthenticated);
+// categoriesRouter.use(ensureAuthenticated);
 
 categoriesRouter.get('/', categoriesController.index);
 

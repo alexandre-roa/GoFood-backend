@@ -45,6 +45,9 @@ class Food {
   image_url: string;
 
   @Column()
+  available: boolean;
+
+  @Column()
   extras: Extra[];
 
   @CreateDateColumn()

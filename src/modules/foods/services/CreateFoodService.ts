@@ -55,6 +55,7 @@ class CreateFoodService {
       description,
       price,
       image_url,
+      available: true,
       extras,
       category_id,
       category,

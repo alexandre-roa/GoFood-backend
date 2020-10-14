@@ -13,6 +13,7 @@ export default interface IFoodDTO {
   image_url?: string;
   extras?: Extra[];
   category_id: string;
+  available: boolean;
   category: FoodCategory | undefined;
   restaurant_id: string;
   restaurant: Restaurant | undefined;
