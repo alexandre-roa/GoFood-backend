@@ -54,7 +54,9 @@ class CreateFoodService {
       title,
       description,
       price,
-      image_url,
+      image_url: image_url
+        ? image_url
+        : 'https://images.unsplash.com/photo-1525999147711-835474620964?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1021&q=80',
       available: true,
       extras,
       category_id,

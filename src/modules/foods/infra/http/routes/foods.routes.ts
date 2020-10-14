@@ -21,7 +21,7 @@ foodsRouter.post(
       title: Joi.string().required(),
       description: Joi.string().required(),
       price: Joi.number().required(),
-      image_url: Joi.string(),
+      image_url: Joi.string().allow(null, ''),
       extras: Joi.array(),
     },
   }),
