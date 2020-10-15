@@ -55,6 +55,10 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
 
     await this.ormRepository.delete(id);
   }
+
+  public async save(category: FoodCategory): Promise<FoodCategory> {
+    return this.ormRepository.save(category);
+  }
 }
 
 export default FoodCategoriesRepository;

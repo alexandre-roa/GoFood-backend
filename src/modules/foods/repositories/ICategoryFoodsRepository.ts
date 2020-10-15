@@ -10,4 +10,5 @@ export default interface ICategoryFoodsRepository {
   ): Promise<FoodCategory | undefined>;
   find(restaurant_id: string): Promise<FoodCategory[] | undefined>;
   delete(category_id: string): Promise<void | FoodCategory[]>;
+  save(category: FoodCategory): Promise<FoodCategory>;
 }

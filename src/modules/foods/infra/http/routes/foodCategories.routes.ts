@@ -3,14 +3,29 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import FoodCategoryController from '../controllers/FoodCategoryController';
 import SelectedCategoryController from '../controllers/SelectedCategoryController';
+import CategoryAvailabilityController from '../controllers/CategoryAvailabilityController';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const foodCategoriesRouter = Router();
 
 const foodCategoryController = new FoodCategoryController();
 const selectedCategoryController = new SelectedCategoryController();
+const categoryAvailabilityController = new CategoryAvailabilityController();
 
 foodCategoriesRouter.use(ensureAuthenticated);
+
+foodCategoriesRouter.patch(
+  '/:category_id/availability',
+  celebrate({
+    [Segments.PARAMS]: {
+      category_id: Joi.string().id().required(),
+    },
+    [Segments.BODY]: {
+      availability: Joi.boolean().required(),
+    },
+  }),
+  categoryAvailabilityController.update,
+);
 
 foodCategoriesRouter.post(
   '/:restaurant_id/create_category',
