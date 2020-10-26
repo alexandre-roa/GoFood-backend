@@ -42,7 +42,7 @@ class CreateFoodService {
     category_id,
     restaurant_id,
   }: IRequest): Promise<Food | null> {
-    const category = await this.foodCategoryRepository.findId(category_id);
+    const category = await this.foodCategoryRepository.findById(category_id);
 
     if (!category) throw new AppError('Category not found');
 

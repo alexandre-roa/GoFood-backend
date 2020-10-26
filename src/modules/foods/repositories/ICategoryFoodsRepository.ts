@@ -3,9 +3,9 @@ import ICreateCategoryFoodDTO from '../dtos/ICreateCategoryFoodDTO';
 
 export default interface ICategoryFoodsRepository {
   create(data: ICreateCategoryFoodDTO): Promise<FoodCategory>;
-  findId(category_id: string | undefined): Promise<FoodCategory | undefined>;
+  findById(category_id: string | undefined): Promise<FoodCategory | undefined>;
   findOne(
-    categoryTitle: string,
+    categoryT_id: string,
     restaurant_id: string,
   ): Promise<FoodCategory | undefined>;
   find(restaurant_id: string): Promise<FoodCategory[] | undefined>;

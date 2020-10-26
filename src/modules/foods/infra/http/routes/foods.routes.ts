@@ -29,10 +29,11 @@ foodsRouter.post(
 );
 
 foodsRouter.get(
-  '/:restaurant_id',
+  '/:restaurant_id/category_food/:category_id',
   celebrate({
     [Segments.PARAMS]: {
       restaurant_id: Joi.string().id().required(),
+      category_id: Joi.string().id().required(),
     },
   }),
   foodsController.index,

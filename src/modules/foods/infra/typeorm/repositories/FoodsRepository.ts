@@ -1,4 +1,3 @@
-import fs from 'fs';
 import {
   getMongoRepository,
   In,
@@ -10,6 +9,8 @@ import Restaurant from '@modules/restaurants/infra/typeorm/schemas/Restaurant';
 
 import IFoodsRepository from '@modules/foods/repositories/IFoodsRepository';
 import ICreateFoodDTO from '@modules/foods/dtos/ICreateFoodDTO';
+import Category from '@modules/categories/infra/typeorm/schemas/Category';
+import FoodCategory from '@modules/foods/infra/typeorm/schemas/FoodCategory';
 
 class FoodsRepository implements IFoodsRepository {
   private ormRepository: MongoRepository<Food>;
@@ -25,8 +26,13 @@ class FoodsRepository implements IFoodsRepository {
     return food;
   }
 
-  public async find(restaurant: Restaurant): Promise<Food[]> {
-    const foods = await this.ormRepository.find({ where: { restaurant } });
+  public async find(
+    restaurant: Restaurant,
+    category: FoodCategory,
+  ): Promise<Food[]> {
+    const foods = await this.ormRepository.find({
+      where: { restaurant, category },
+    });
 
     return foods;
   }

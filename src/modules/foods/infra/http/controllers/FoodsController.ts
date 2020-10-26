@@ -27,11 +27,11 @@ export default class FoodsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { restaurant_id } = request.params;
+    const { restaurant_id, category_id } = request.params;
 
     const getFoods = container.resolve(GetFoods);
 
-    const foods = await getFoods.execute(restaurant_id);
+    const foods = await getFoods.execute(restaurant_id, category_id);
 
     return response.json(foods);
   }

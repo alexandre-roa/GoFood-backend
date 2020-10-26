@@ -52,10 +52,11 @@ foodCategoriesRouter.get(
 );
 
 foodCategoriesRouter.get(
-  '/:restaurant_id/category',
+  '/:restaurant_id/category/:category_id',
   celebrate({
     [Segments.PARAMS]: {
       restaurant_id: Joi.string().id().required(),
+      category_id: Joi.string().id().required(),
     },
   }),
   selectedCategoryController.index,

@@ -21,7 +21,9 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
     return category;
   }
 
-  public async findId(category_id: string): Promise<FoodCategory | undefined> {
+  public async findById(
+    category_id: string,
+  ): Promise<FoodCategory | undefined> {
     const id = JSON.stringify(category_id).replace(/"/g, '');
 
     const category = await this.ormRepository.findOne(id);
@@ -29,12 +31,9 @@ class FoodCategoriesRepository implements ICategoryFoodsRepository {
     return category;
   }
 
-  public async findOne(
-    categoryTitle: string,
-    restaurant_id: string,
-  ): Promise<FoodCategory | undefined> {
+  public async findOne(category_id: string): Promise<FoodCategory | undefined> {
     const category = this.ormRepository.findOne({
-      where: { title: categoryTitle, restaurant_id },
+      where: { id: category_id },
     });
 
     if (!category) throw new AppError('Category not found');

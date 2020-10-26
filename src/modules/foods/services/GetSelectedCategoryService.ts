@@ -16,21 +16,18 @@ class GetSelectedCategoryService {
   ) {}
 
   public async execute(
-    categoryTitle,
+    category_id: string,
     restaurant_id: string,
   ): Promise<FoodCategory> {
-    const restaurant = await this.restaurantsRepository.findById(restaurant_id);
-
-    const restaurantId = JSON.stringify(restaurant.id).replace(/"/g, '');
-
-    const category = await this.foodCategoryRepository.findOne(
-      categoryTitle,
-      restaurantId,
-    );
+    const category = await this.foodCategoryRepository.findById(category_id);
 
     if (!category) throw new AppError('Category not found');
 
-    return category;
+    const restaurant = await this.restaurantsRepository.findById(restaurant_id);
+
+    if (!restaurant) throw new AppError('Restaurant not found');
+
+    return { ...category, restaurant };
   }
 }
 
